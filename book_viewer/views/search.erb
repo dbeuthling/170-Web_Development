@@ -8,8 +8,9 @@
   <h2 class="content-subhead">Results for '<%= params[:query]%>'</h2>
 
   <ul>
-    <% @results.each do |chapter, index, paragraph| %>
-      <li><a href="/chapters/<%= index+1 %>#<%= paragraph %>"><%= chapter %></a></li>
+    <% @results.each do |chapter, index, p_index| %>
+      <li><a href="/chapters/<%= index+1 %>#<%= p_index %>"><%= chapter %></a></li>
+      <%= display_paragraph(index, p_index) %>
     <% end %>
   </ul>
 <% end %>
