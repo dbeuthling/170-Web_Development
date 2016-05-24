@@ -1,0 +1,17 @@
+<h2 class="content-subhead">Search</h2>
+
+<form action="/search" method="get">
+  <input name="query" value="<%= params[:query] %>">
+  <button type="submit">Search</button>
+</form>
+<div class="pure-menu">
+  <ul class="pure-menu-list">
+<% @files.each do |file|%>
+  <% if File.read("data/#{file}").include?("#{params[:query]}") %>
+  <li class="pure-menu-item">
+  <a href="/chapters/<%= "#{file}".gsub(/\D/, "") %>" class="pure-menu-link"><%= @contents["#{file}".gsub(/\D/, "").to_i - 1] %></a>
+  </li>
+<% end %>
+<% end %>
+</ul>
+</div>
