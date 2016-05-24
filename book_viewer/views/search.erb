@@ -4,14 +4,12 @@
   <input name="query" value="<%= params[:query] %>">
   <button type="submit">Search</button>
 </form>
-<div class="pure-menu">
-  <ul class="pure-menu-list">
-<% @files.each do |file|%>
-  <% if File.read("data/#{file}").include?("#{params[:query]}") %>
-  <li class="pure-menu-item">
-  <a href="/chapters/<%= "#{file}".gsub(/\D/, "") %>" class="pure-menu-link"><%= @contents["#{file}".gsub(/\D/, "").to_i - 1] %></a>
-  </li>
+<% if @results %>
+  <h2 class="content-subhead">Results for '<%= params[:query]%>'</h2>
+
+  <ul>
+    <% @results.each do |chapter, index, paragraph| %>
+      <li><a href="/chapters/<%= index+1 %>#<%= paragraph %>"><%= chapter %></a></li>
+    <% end %>
+  </ul>
 <% end %>
-<% end %>
-</ul>
-</div>
