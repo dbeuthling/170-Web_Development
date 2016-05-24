@@ -10,7 +10,7 @@
   <ul>
     <% @results.each do |chapter, index, p_index| %>
       <li><a href="/chapters/<%= index+1 %>#<%= p_index %>"><%= chapter %></a></li>
-      <%= display_paragraph(index, p_index) %>
+      <p><%= display_paragraph(index, p_index, params[:query]) %></p>
     <% end %>
   </ul>
 <% end %>
