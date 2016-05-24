@@ -8,6 +8,18 @@ before do
   @users = @user_details.map { |name_array, _| name_array }
 end
 
+helpers do
+  def count_interests
+    num_of_interests = []
+    @user_details.each_pair do |_, details|
+      details.each_pair do |key, value|
+        num_of_interests << value if key == :interests
+      end
+    end
+    num_of_interests.flatten.size
+  end
+end
+
 get "/" do
   @users
 
@@ -15,10 +27,10 @@ get "/" do
 end
 
 get "/person/:name" do
-  name = params[:name]
-  @email = @user_details[name.to_sym][:email]
-  @interests = @user_details[name.to_sym][:interests]
-  @others = @users - [name.to_sym]
+  name = params[:name].to_sym
+  @email = @user_details[name][:email]
+  @interests = @user_details[name][:interests]
+  @others = @users - [name]
 
   erb :person
 
