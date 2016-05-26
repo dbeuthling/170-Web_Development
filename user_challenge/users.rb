@@ -27,10 +27,10 @@ get "/" do
 end
 
 get "/person/:name" do
-  name = params[:name].to_sym
-  @email = @user_details[name][:email]
-  @interests = @user_details[name][:interests]
-  @others = @users - [name]
+  @name = params[:name].to_sym
+  @email = @user_details[@name][:email]
+  @interests = @user_details[@name][:interests]
+  @others = @users - [@name]
 
   erb :person
 
